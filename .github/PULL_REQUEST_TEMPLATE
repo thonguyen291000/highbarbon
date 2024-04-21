@@ -1,0 +1,35 @@
+# Description
+<!-- Detailed explanation of
+1. What is this PR for?
+2. Why you come up with the solution?
+-->
+
+<!-- Fill in here -->
+
+# Screenshots / Videos
+
+<!-- If there is no image or video attached, please add an explanation. -->
+
+<!-- Fill in here -->
+
+
+# Testing plan
+<!-- Try to think we are a tester to read this PR change and prepare a testing plan for it:
+1. The testing plan needs to be run on staging/sandbox environment.
+2. [Optional] Provide the testing account & environment: Eg
+- Account: ben@thinkei.com/P@ssword17e4
+- Sandbox: instapay.staging.ehrocks.com
+3. The common pattern of testing plan is:
+- [ ] On the page .....
+      When I do something ....
+      Then I see .....
+      And Something else.....
+-->
+<!-- If we don't have a testing plan, we can't ensure the PR gets merged won't cause any incident. -->
+
+<!-- Fill in here -->
+
+# Checklist
+
+ - [ ] Is your backend ready? Or do you have flag to restrict access your front-end?
+ - [ ] Have you applied I18n for all the text of your changed files?
