@@ -10,7 +10,7 @@ const trackSchema = new Schema(
     event_name: { type: String, require },
     metadata: { type: Object },
     createdAt: { type: Date, default: Date.now },
-    updateAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,
