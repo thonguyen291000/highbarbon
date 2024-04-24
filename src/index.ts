@@ -3,6 +3,7 @@ import express from "express";
 import restaurantsRouter from "./routers/restaurants";
 import tablesRouter from "./routers/tables";
 import reservationRouter from "./routers/reservation";
+import trackRouter from "./routers/tracks";
 const morgan = require("morgan");
 const app = express();
 require("dotenv").config();
@@ -28,7 +29,7 @@ app.use("/api/branches", branchesRouter);
 app.use("/api/restaurants", restaurantsRouter);
 app.use("/api/tables", tablesRouter);
 app.use("/api/reservation", reservationRouter);
-app.use("/api/track", reservationRouter);
+app.use("/api/track", trackRouter);
 
 //Connect Database
 db.connectDatabase();
