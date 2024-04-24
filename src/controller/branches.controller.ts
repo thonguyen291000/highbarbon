@@ -20,6 +20,7 @@ export const createBranch = async (req: Request, res: Response) => {
     name: req.body.name,
     description: req.body.description,
     image: req.body.image,
+    city: req.body.city,
     restaurants: [],
   });
 

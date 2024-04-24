@@ -58,6 +58,8 @@ export const createReservation = async (req: Request, res: Response) => {
   const reservation = new Reservation({
     _id: new mongoose.Types.ObjectId().toString(),
     table_id: req.body.table_id,
+    branch_id: req.body.branch_id,
+    restaurant_id: req.body.restaurant_id,
     username: req.body.username,
     phone: req.body.phone,
     amount_of_people: req.body.amount_of_people,

@@ -4,6 +4,7 @@ export interface IBranch extends Document {
   description?: string;
   restaurants: string[];
   image: string;
+  city: string;
 }
 
 const branchSchema = new Schema(
@@ -13,6 +14,7 @@ const branchSchema = new Schema(
     description: { type: String },
     restaurants: [{ type: Schema.Types.ObjectId, ref: "Restaurant" }],
     image: { type: String, require },
+    city: { type: String, require },
     createdAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
   },
