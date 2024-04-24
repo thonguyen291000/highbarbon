@@ -28,6 +28,7 @@ app.use("/api/branches", branchesRouter);
 app.use("/api/restaurants", restaurantsRouter);
 app.use("/api/tables", tablesRouter);
 app.use("/api/reservation", reservationRouter);
+app.use("/api/track", reservationRouter);
 
 //Connect Database
 db.connectDatabase();
