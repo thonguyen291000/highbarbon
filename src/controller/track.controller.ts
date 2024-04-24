@@ -8,7 +8,7 @@ dotenv.config();
 export const createTrackEvent = async (req: Request, res: Response) => {
   const track = new Track({
     _id: new mongoose.Types.ObjectId().toString(),
-    event_name: req.body.track,
+    event_name: req.body.event_name,
     metadata: req.body.metadata,
   });
 
