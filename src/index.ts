@@ -12,9 +12,18 @@ const cookieParser = require("cookie-parser");
 
 // cors
 const cors = require("cors");
+const whitelist = [
+  "https://662d36b252d90ffd49907696--flourishing-swan-3e332f.netlify.app/",
+  "http://localhost:5173/",
+];
 const corsOptions = {
-  origin: true,
-  credentials: true,
+  origin: function (origin: string, callback: any) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
 };
 
 app.use(cors(corsOptions));
