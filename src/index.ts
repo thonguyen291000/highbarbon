@@ -33,6 +33,11 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 //Router
 app.use("/api/branches", branchesRouter);
 app.use("/api/restaurants", restaurantsRouter);
