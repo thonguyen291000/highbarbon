@@ -15,10 +15,11 @@ const cors = require("cors");
 const whitelist = [
   "https://662d36b252d90ffd49907696--flourishing-swan-3e332f.netlify.app",
   "http://localhost:5173",
+  "http://localhost:8000",
 ];
 const corsOptions = {
   origin: function (origin: string, callback: any) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     "https://662d36b252d90ffd49907696--flourishing-swan-3e332f.netlify.app",
     "http://localhost:5173",
+    "http://localhost:8000",
   ];
   const origin = req.headers.origin;
   if (origin) {
