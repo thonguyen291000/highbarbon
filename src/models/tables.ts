@@ -3,7 +3,7 @@ export interface ITable extends Document {
   restaurant_id: string;
   name: string;
   description: string;
-  amount_of_booked: number;
+  minimum_booked_users: number;
   fee: number;
   fee_unit: string;
   calendar: Record<string, Record<string, boolean>>;
@@ -16,7 +16,7 @@ const tableSchema = new Schema(
     restaurant_id: { type: String, require },
     name: { type: String, require },
     description: { type: String, require },
-    amount_of_booked: { type: Number, default: 0 },
+    minimum_booked_users: { type: Number, default: 0 },
     fee: { type: Number, require },
     fee_unit: { type: String, require },
     calendar: { type: Object, require }, // calendar: {'29/10/2024': {1:true, 2:false, 3:true, 4:false, 5:true, 6:false, 7:true, 8:false, 9:true, 10:false, ... 24:false}}

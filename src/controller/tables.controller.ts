@@ -21,7 +21,7 @@ export const createTable = async (req: Request, res: Response) => {
     restaurant_id: req.body.restaurant_id,
     name: req.body.name,
     description: req.body.description,
-    amount_of_booked: req.body.amount_of_booked,
+    minimum_booked_users: req.body.minimum_booked_users,
     fee: req.body.fee,
     fee_unit: req.body.fee_unit,
     calendar: req.body.calendar,
