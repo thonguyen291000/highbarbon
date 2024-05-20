@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Request, Response } from "express";
 import Reservation from "../models/reservation";
+import Tables from "../models/tables";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 import Table from "../models/tables";
@@ -9,7 +10,21 @@ dotenv.config();
 export const getReservation = async (req: Request, res: Response) => {
   try {
     const reservation = await Reservation.find();
-    res.json(reservation);
+
+    const reservationWithTableInfo = [];
+
+    for (let index = 0; index < reservation.length; index++) {
+      const item = reservation[index];
+
+      const table = await Tables.findById(item.table_id);
+
+      reservationWithTableInfo.push({
+        ...item.toObject(),
+        table,
+      });
+    }
+
+    res.json(reservationWithTableInfo);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

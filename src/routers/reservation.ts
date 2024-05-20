@@ -11,6 +11,6 @@ const reservationRouter: Router = Router();
 reservationRouter.get("/", getReservation);
 reservationRouter.post("/", createReservation);
 reservationRouter.put("/:id", updateReservation);
-reservationRouter.put("/:id", deleteReservation);
+reservationRouter.delete("/:id", deleteReservation);
 
 export default reservationRouter;
