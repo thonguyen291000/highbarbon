@@ -40,18 +40,20 @@ export const createReservation = async (req: Request, res: Response) => {
   const reservationDates = Object.keys(req.body.reservation_time);
 
   reservationDates.forEach((date: string) => {
-    const dateHours = table.calendar[date];
+    if (table.calendar) {
+      const dateHours = table.calendar[date];
 
-    req.body.reservation_time?.[date].forEach((hour: number) => {
-      if (!!dateHours?.[hour]) {
-        return res
-          .status(400)
-          .json({ message: `Table is already reserved at ${hour}` });
-      }
-    });
+      req.body.reservation_time?.[date].forEach((hour: number) => {
+        if (!!dateHours?.[hour]) {
+          return res
+            .status(400)
+            .json({ message: `Table is already reserved at ${hour}` });
+        }
+      });
+    }
   });
 
-  const newTableCalendar = { ...table.calendar };
+  const newTableCalendar = { ...(table.calendar || {}) };
 
   reservationDates.forEach((date: string) => {
     let hours: any = {};
@@ -61,7 +63,7 @@ export const createReservation = async (req: Request, res: Response) => {
         [hour]: true,
       };
     });
-    console.log(hours);
+
     if (newTableCalendar[date]) {
       newTableCalendar[date] = { ...newTableCalendar[date], ...hours };
     } else {
