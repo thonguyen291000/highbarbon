@@ -1,4 +1,5 @@
 import { Document, Schema, model } from "mongoose";
+import { ReservationStatuses } from "../const";
 export interface IReservation extends Document {
   table_id: string;
   restaurant_id: string;
@@ -6,7 +7,7 @@ export interface IReservation extends Document {
   username: string;
   phone: string;
   image: string;
-  reservation_time: number[];
+  reservation_time: Record<string, string[]>;
 }
 
 const reservationSchema = new Schema(
@@ -19,6 +20,7 @@ const reservationSchema = new Schema(
     phone: { type: String, require },
     amount_of_people: { type: Number, require },
     reservation_time: { type: Object, require },
+    status: { type: String, require, default: ReservationStatuses.confirming },
     createdAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
   },
