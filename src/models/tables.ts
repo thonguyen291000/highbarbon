@@ -6,7 +6,7 @@ export interface ITable extends Document {
   minimum_booked_users: number;
   fee: number;
   fee_unit: string;
-  calendar: Record<string, Record<string, boolean>>;
+  calendar: Record<string, Record<string, boolean | string>>;
   reservation: string[];
 }
 

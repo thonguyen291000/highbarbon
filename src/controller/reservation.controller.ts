@@ -45,7 +45,7 @@ export const createReservation = async (req: Request, res: Response) => {
       const dateHours = table.calendar[date];
 
       req.body.reservation_time?.[date].forEach((hour: number) => {
-        if (!!dateHours?.[hour]) {
+        if (!!dateHours?.[hour] || dateHours?.[hour] === "") {
           return res
             .status(400)
             .json({ message: `Table is already reserved at ${hour}` });
@@ -61,7 +61,7 @@ export const createReservation = async (req: Request, res: Response) => {
     req.body.reservation_time?.[date].forEach((hour: number) => {
       hours = {
         ...hours,
-        [hour]: true,
+        [hour]: "",
       };
     });
 
@@ -129,6 +129,37 @@ export const updateReservation = async (req: Request, res: Response) => {
 
         hours.forEach((hour) => {
           newTableCalendar[key][hour] = false;
+        });
+      });
+
+      await Table.findByIdAndUpdate(
+        reservation?.table_id,
+        {
+          calendar: {
+            ...table?.calendar,
+            ...newTableCalendar,
+          },
+        },
+        {
+          new: true,
+        }
+      );
+    }
+
+    if (req.body.status === ReservationStatuses.done) {
+      const table = await Table.findById(reservation?.table_id);
+
+      const dateKeys = Object.keys(reservation.reservation_time || {});
+
+      const newTableCalendar: Record<string, Record<string, boolean>> = {};
+
+      dateKeys.forEach((key: string) => {
+        const hours = reservation.reservation_time[key];
+
+        newTableCalendar[key] = {};
+
+        hours.forEach((hour) => {
+          newTableCalendar[key][hour] = true;
         });
       });
 
