@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Request, Response } from "express";
 import Reservation from "../models/reservation";
+import Restaurants from "../models/restaurants";
 import Tables from "../models/tables";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -13,15 +14,25 @@ export const getReservation = async (req: Request, res: Response) => {
     const reservation = await Reservation.find();
 
     const reservationWithTableInfo = [];
+    const cachedRestaurants: any = {};
 
     for (let index = 0; index < reservation.length; index++) {
       const item = reservation[index];
 
       const table = await Tables.findById(item.table_id);
 
+      if (!table) throw new Error(`Table ${item.table_id} not found`);
+
+      if (!cachedRestaurants[table?.restaurant_id]) {
+        const restaurant = await Restaurants.findById(table?.restaurant_id);
+
+        cachedRestaurants[table?.restaurant_id] = restaurant;
+      }
+
       reservationWithTableInfo.push({
         ...item.toObject(),
         table,
+        restaurant: cachedRestaurants[table?.restaurant_id]?.name,
       });
     }
 
